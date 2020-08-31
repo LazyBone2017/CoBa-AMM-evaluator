@@ -1,0 +1,106 @@
+#board {
+	background: #DDDDDD;
+	width: 94%;
+	height: 96%;
+	position: absolute;
+	top: 2%;
+	left: 2%;
+}
+
+#subBoard {
+	width: 96%;
+	height: 90%;
+	position: absolute;
+	top: 5%;
+	background: #EEEEEE;
+}
+
+#menuBar {
+	width: 100%;
+	height: 5%;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+#infoContainer{
+	float: right;
+	margin-right:4%;
+	width: 20%;
+	height:100%;
+}
+
+.mItem {
+	width: 12%;
+	height:100%;
+	
+	float:left;
+	text-decoration: none;
+	margin-right: 3px;
+	background: #CCCCCC;
+	text-align: center;
+}
+
+table {
+	width: 99%;
+}
+
+td {
+	border: 1px solid black;
+	text-align: center;
+
+}
+
+.ttf {
+	width: 50%;
+}
+
+.ttf div {
+	word-break: break-word;
+	text-align: left;
+	margin: 10px;
+}
+
+#fullscreenContainer{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	overflow: hidden;
+	background: rgba(100, 100, 100, 0.7);
+	z-index: 100;
+}
+
+#popup {
+	position: absolute;
+	width: 20%;
+	height: 20%;
+	left: 35%;
+	top: 20%;
+	background:white;
+}
+
+#btnEval {
+	position: absolute;
+	width: 35%;
+	height: 15%;
+	bottom: 15%;
+	right: 10%;
+}
+
+#btnAdd {
+	position: absolute;
+	width: 35%;
+	height: 15%;
+	bottom: 15%;
+	left: 10%;
+}
+
+#popupText {
+	text-align: center;
+	position: absolute;
+	width: 90%;
+	top: 15%;
+	left: 5%;
+	font-weight: bold;
+}
