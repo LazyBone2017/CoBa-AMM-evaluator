@@ -113,3 +113,49 @@ td {
 	left: 5%;
 	font-weight: bold;
 }
+
+#PUTG {
+	text-align: center;
+	position: absolute;
+	width: 90%;
+	top: 15%;
+	left: 5%;
+	font-weight: bold;
+}
+
+#GB0 {
+	position: absolute;
+	width: 35%;
+	height: 15%;
+	bottom: 15%;
+	left: 10%;
+}
+
+
+#GB1 {
+	position: absolute;
+	width: 35%;
+	height: 15%;
+	bottom: 15%;
+	right: 10%;
+}
+
+#GFC{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	overflow: hidden;
+	background: rgba(100, 100, 100, 0.7);
+	z-index: 100;
+}
+
+#PUG {
+	position: absolute;
+	width: 20%;
+	height: 20%;
+	left: 35%;
+	top: 20%;
+	background:white;
+}
+

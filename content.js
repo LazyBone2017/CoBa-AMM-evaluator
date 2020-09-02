@@ -5,3 +5,5 @@ var content = [
 		["Teams regularly produce value-added and value-added deliveries", "Incremental deliveries of MVPs enable early customer/users feedback", "Velocity in the teams makes delivery dates predictable", "E2E cut allows teams independent delivery capability", "Operation is efficient and stable", "Cross-functional teams with task-related skill mix", "Definition of Ready, Definition of Done/Acceptance criteria are clear, coordinated and transparent", "QBR-Epics, Epics, User Stories follow the INVEST principle and provide &quotfinished&quot functionality"],
 		["Digital architects are actively involved in the software development process", "SW architecture model supports agile development", "Deployment is automated on the various instances (Dev, Test, prod, ...)", "Automated tests replace manual test whenever possible", "Automated, continuous software build"]		
 ];	
+
+var header = ["CUSTOMER/USERS", "TRANSPARENCY", "IMPROVEMENT & INNOVATION", "DELIVERY CAPABILITY", "SOFTWARE DEVELOPMENT"];

@@ -7,7 +7,8 @@ function setup(){
 	for(let i = 0; i < data[0].length; i++){
 		let avg = 0;
 		 for(let j = 0; j < data.length; j++){
-			avg += parseInt(data[j][i]);
+			let val = parseInt(data[j][i]);
+			avg += val == 6 ? 0 : val;
 		}
 		averages.push(avg / data.length);
 	}
@@ -66,4 +67,8 @@ function generateMenu(){
 		}
 		wrapper.appendChild(a);
 	}
+}
+
+function back(){
+	window.open("index.html", true);
 }
