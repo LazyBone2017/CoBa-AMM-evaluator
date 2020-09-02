@@ -6,7 +6,10 @@ window.onload = setup();
 
 function setup(){
 	tabs = document.getElementsByClassName("mItem");
-	for(let i= 0; i < tabs.length; i++)tabs[i].onclick = function(){changeTab(i)};
+	for(let i= 0; i < tabs.length; i++){
+		tabs[i].onclick = function(){changeTab(i)};
+		tabs[i].innerHTML = i == tabs.length - 1 ? "EVALUATION" : header[i];
+	}
 	let addBtn = document.getElementById("btnAdd");
 	addBtn.onclick = function(){
 		document.getElementById("fullscreenContainer").style.display = "none";
@@ -14,10 +17,27 @@ function setup(){
 	}
 	let evalBtn = document.getElementById("btnEval");
 	evalBtn.onclick = function(){
-		console.log("TEST");
 		document.getElementById("fullscreenContainer").style.display = "none";
 		changeTab(5);
 	}
+	let transferBtn = document.getElementById("btnTransfer");
+	transferBtn.onclick = function(){
+		if(confirm("Export?")){
+			exportData();
+		}
+		else importData();
+	}
+	document.getElementById("inputFile").addEventListener('change', function() { 
+			var fr=new FileReader(); 
+			console.log("CLICKED");
+             		fr.onload=function(){ 
+				let res = JSON.parse(fr.result); 
+				console.log(res);
+               			globalUserData = res;
+				changeTab(5);
+			}
+			fr.readAsText(this.files[0]); 
+        });
 	changeTab(0);
 }
 
@@ -73,6 +93,8 @@ function generateForms(index){
 				radio.id = i + "r" + j;
 				radio.name = "r" + i;;
 				radio.value = j;
+				if(j == 3)radio.checked = true; //both for testing
+				if(getRandomInt(5) == 1)radio.checked = true;
 				td.appendChild(radio);
 				td.onclick = function(){radio.checked = true;};
 			}
@@ -82,6 +104,10 @@ function generateForms(index){
 		form.appendChild(table);
 	}
 	return form;
+}
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
 }
 
 function submitData(index){ 
@@ -94,15 +120,15 @@ function submitData(index){
 		}
 		if(data.length == i - 1)data[i - 1] = -1;
 	}
-	console.log(data);
+	//console.log(data);
 	if(data.includes(-1)){
 		alert("You have to fill out the whole list in order to continue");
 		return;
 	}
-	tempUserData[index] = data;
+	tempUserData.push(...data);
 	if(index == 4){
-		console.log(tempUserData);
-		globalUserData[globalUserData.length] = data;
+		//console.log(tempUserData);
+		globalUserData[globalUserData.length] = tempUserData;
 		document.getElementById("fullscreenContainer").style.display = "block";
 		
 	}
@@ -110,5 +136,38 @@ function submitData(index){
 }
 
 function evaluate(){
+	console.log(globalUserData);
+	localStorage.setItem("data", JSON.stringify(globalUserData));
+	window.open("eval.html", false);
+}
+
+function exportData(){
+	if(!confirm("Only completed entries will be exported. Proceed?"))return;
+	let name = "AMM_DATA_" + getDate();
+	downloadContent(name + ".json", JSON.stringify(globalUserData));
 	
 }
+
+function importData(){
+	if(!confirm("Current entries will be overwritten. Proceed?"))return;
+	document.getElementById("inputFile").click();
+}
+
+function getDate(){
+	let date = new Date();
+	let day = date.getDate() + "";
+	let month = date.getMonth() + "";
+	let year = (date.getFullYear() + "").slice(0, 2);
+	if(month.length == 1)month = 0 + month;
+	if(day.length == 1)day = 0 + day;
+	return day + month + year;
+}
+
+function downloadContent(name, content) {
+  var atag = document.createElement("a");
+  var file = new Blob([content], {type: 'text/plain'});
+  atag.href = URL.createObjectURL(file);
+  atag.download = name;
+  atag.click();
+}
+
