@@ -1,0 +1,65 @@
+#PUTG {
+	text-align: center;
+	position: absolute;
+	width: 90%;
+	top: 15%;
+	left: 5%;
+	font-weight: bold;
+	font-family: Verdana;
+	font-size: 0.7vw;
+}
+
+#GB0 {
+	position: absolute;
+	width: 37%;
+	height: 15%;
+	bottom: 15%;
+	left: 8%;
+	border: 1px solid black;
+	background: #e5e5e5;
+	font-size: 0.6vw;
+	font-family: Verdana;
+}
+
+
+#GB1 {
+	position: absolute;
+	width: 37%;
+	height: 15%;
+	bottom: 15%;
+	right: 8%;
+	border: 1px solid black;
+	background: #e5e5e5;
+	font-size: 0.6vw;
+	font-family: Verdana;
+}
+
+#GFC{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	overflow: hidden;
+	background: rgba(100, 100, 100, 0.7);
+	z-index: 100;
+}
+
+#PUG {
+	position: absolute;
+	width: 20%;
+	height: 20%;
+	left: 40%;
+	top: 20%;
+	background:white;
+	box-sizing: border-box;
+	border: 1px solid #ffcc33;
+}
+
+#GB0:hover, #GB1:hover {
+	border-color: #ffcc33;
+	border-width: 2px;
+}
+
+#GB0:focus, #GB1:focus {
+	outline: none;
+}

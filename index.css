@@ -1,11 +1,17 @@
-
+#board {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	margin-top: 1%;
+	
+}
 
 #subBoard {
 	width: 96%;
 	height: 90%;
-	position: absolute;
-	top: 5%;
-	background: #EEEEEE;
+	padding-top: 1%;
+	margin-left: 1%;
+	background: white;
 }
 
 #menuBar {
@@ -13,6 +19,7 @@
 	height: 5%;
 	list-style-type: none;
 	margin: 0;
+	margin-left: 1%;
 	padding: 0;
 }
 
@@ -29,29 +36,35 @@
 	margin-right: 16%;
 	width: 20%;
 	height: 60%;
-}
-
-#btnTransfer {
-	float: right;
-	margin-top: 3%;
-	margin-right: 22%;
-	width: 30%;
-	height: 60%;
+	font-size: 0.7vw;
+	font-family: Verdana;
 }
 
 .mItem {
 	width: 12%;
 	height:100%;
-	
 	float:left;
-	text-decoration: none;
 	margin-right: 3px;
 	background: #CCCCCC;
-	text-align: center;
+}
+
+.mItemContent {
+	display: flex;
+	justify-content: center;
+	height: 100%;
+	align-items: center;
+	align: center;
+	font-size: 0.7vw;
+	font-family: Verdana;
 }
 
 table {
-	width: 99%;
+	width: 98%;
+	margin-left: 1%;	
+}
+
+.tableRow {
+	background: white;
 }
 
 td {
@@ -64,98 +77,73 @@ td {
 	width: 50%;
 }
 
+td div {
+	font-size: 0.7vw;
+	font-family: Verdana;
+}
+
+
 .ttf div {
 	word-break: break-word;
 	text-align: left;
 	margin: 10px;
+	font-size: 0.8vw;
+	font-family: Verdana;
 }
 
-#fullscreenContainer{
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	margin: 0px;
-	overflow: hidden;
-	background: rgba(100, 100, 100, 0.7);
-	z-index: 100;
+.trb {
+	-webkit-appearance: none;
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	padding: 2px;
+	margin: 0;
+	background-clip: content-box;
+	border: 1px solid #777777;
+	background-color: #BBBBBB;
+	border-radius: 50%;
 }
 
-#popup {
-	position: absolute;
-	width: 20%;
-	height: 20%;
-	left: 35%;
-	top: 20%;
-	background:white;
+.trb:checked {
+		background-color: #ffcc33;
 }
 
-#btnEval {
-	position: absolute;
-	width: 35%;
-	height: 15%;
-	bottom: 15%;
-	right: 10%;
-}
-
-#btnAdd {
-	position: absolute;
-	width: 35%;
-	height: 15%;
-	bottom: 15%;
-	left: 10%;
-}
-
-#popupText {
-	text-align: center;
-	position: absolute;
-	width: 90%;
-	top: 15%;
-	left: 5%;
-	font-weight: bold;
-}
-
-#PUTG {
-	text-align: center;
-	position: absolute;
-	width: 90%;
-	top: 15%;
-	left: 5%;
-	font-weight: bold;
-}
-
-#GB0 {
-	position: absolute;
-	width: 35%;
-	height: 15%;
-	bottom: 15%;
-	left: 10%;
+.trb:focus {
+	outline: none;
 }
 
 
-#GB1 {
-	position: absolute;
-	width: 35%;
-	height: 15%;
-	bottom: 15%;
-	right: 10%;
+#btnTransfer {
+	border-radius: 0;
+	border: 1px solid black;
+	background: #CCCCCC;
+	color: white;
+	float: right;
+	margin-top: 3%;
+	margin-right: 20%;
+	width: 40%;
+	height: 60%;
+	font-size: 0.6vw;
+	font-family: Verdana;
 }
 
-#GFC{
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	margin: 0px;
-	overflow: hidden;
-	background: rgba(100, 100, 100, 0.7);
-	z-index: 100;
+#submitBtn, #clearBtn {
+	margin-left: 1%;
+	border-radius: 0;
+	border: 1px solid black;
+	width: 8%;
+	height: 3%;
+	background: #e5e5e5;
+	font-size: 0.6vw;
+	font-family: Verdana;
 }
 
-#PUG {
-	position: absolute;
-	width: 20%;
-	height: 20%;
-	left: 35%;
-	top: 20%;
-	background:white;
+#submitBtn:hover, #clearBtn:hover , #btnTransfer:hover{
+	border-color: #ffcc33;
+	border-width: 2px;
+}
+
+#submitBtn:focus, #clearBtn:focus, #btnTransfer:focus {
+	outline: none;
 }
 

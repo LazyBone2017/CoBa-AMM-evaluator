@@ -5,12 +5,14 @@ window.onload = setup();
 
 
 function setup(){
+	console.log(screen.width + " x " + document.body.style.height);
 	let storage = JSON.parse(localStorage.getItem("data"));
 	if(storage != undefined)globalUserData = storage;
 	tabs = document.getElementsByClassName("mItem");
-	for(let i= 0; i < tabs.length; i++){
+	let tabContent = document.getElementsByClassName("mItemContent");
+	for(let i= 0; i < tabContent.length; i++){
 		//tabs[i].onclick = function(){changeTab(i)};
-		tabs[i].innerHTML = i == tabs.length - 1 ? "EVALUATION" : header[i];
+		tabContent[i].innerHTML = i == tabs.length - 1 ? "EVALUATION" : header[i];
 	}
 	let transferBtn = document.getElementById("btnTransfer");
 	transferBtn.onclick = function(){
@@ -43,7 +45,7 @@ function changeTab(index){
 	for(let i = 0; i < tabs.length; i++){
 		if(i != index)tabs[i].style.background = "#CCCCCC";
 	}
-	item.style.background = "#EEEEEE";
+	item.style.background = "white";
 	document.getElementById("subBoard").innerHTML = "";
 	if(index == 0){
 		tempUserData = [];
@@ -57,14 +59,29 @@ function loadTab(index){
 	let subBoard = document.getElementById("subBoard");
 	subBoard.appendChild(generateForms(index));
 	let button = document.createElement("button");
+	button.id = "submitBtn";
 	button.innerHTML = "SUBMIT";
 	button.onclick = function(){submitData(index)};
 	subBoard.appendChild(button);
 
 	let clearBtn = document.createElement("button");
 	clearBtn.id = "clearBtn";
-	clearBtn.innerHTML = "Clear entries";
-	clearBtn.onclick = function(){globalUserData = []; changeTab(0)};
+	clearBtn.innerHTML = "CLEAR ENTRIES";
+	clearBtn.onclick = function(){
+		object = {
+			prompt: "Current data will be deleted. Proceed?",
+			btn0txt: "CANCEL",
+			btn1txt: "PROCEED",
+			btn0fct: function(){document.getElementById("GFC").style.display = "none";},
+			btn1fct: function(){
+				document.getElementById("GFC").style.display = "none";
+				globalUserData = []; 
+				localStorage.setItem("data", JSON.stringify(globalUserData));
+				changeTab(0);
+			}
+		};
+		loadPopup();
+	}
 	subBoard.appendChild(clearBtn);
 }
 
@@ -74,6 +91,8 @@ function generateForms(index){
 	for(let i = 0; i <= content[index].length; i++){
 		let tr = document.createElement("tr");
 		tr.className = "tableRow";
+		if(i == 0)tr.style.background = "#ffcc33";
+		else if(i % 2 == 0)tr.style.background = "#e6e6e6";
 		for(let j = 0; j < 7; j++){
 		let td = document.createElement("td");
 		let wrapper = document.createElement("div");
@@ -93,10 +112,12 @@ function generateForms(index){
 				let radio = document.createElement("input");
 				radio.type = "radio";
 				radio.id = i + "r" + j;
+				radio.className = "trb";
 				radio.name = "r" + i;;
 				radio.value = j;
 				/*if(j == 3)radio.checked = true; //both for testing
 				if(getRandomInt(5) == 1)radio.checked = true;*/
+			
 				td.appendChild(radio);
 				td.onclick = function(){radio.checked = true;};
 			}
@@ -122,17 +143,13 @@ function submitData(index){
 		}
 		if(data.length == i - 1)data[i - 1] = -1;
 	}
-	//console.log(data);
 	if(data.includes(-1)){
 		alert("You have to fill out the whole list in order to continue");
 		return;
 	}
 	tempUserData.push(...data);
 	if(index == 4){
-		//console.log(tempUserData);
 		globalUserData[globalUserData.length] = tempUserData;
-		//document.getElementById("fullscreenContainer").style.display = "block";
-
 		object = {
 			prompt: "Do you want to evaluate? You will not be able to add more data afterwards.",
 			btn0txt: "Add more data",
@@ -155,7 +172,7 @@ function submitData(index){
 function evaluate(){
 	console.log(globalUserData);
 	localStorage.setItem("data", JSON.stringify(globalUserData));
-	window.open("eval.html", true);
+	window.open("eval.html", "_self");
 }
 
 function exportData(){
@@ -174,7 +191,6 @@ function exportData(){
 }
 
 function importData(){
-	//if(!confirm("Current entries will be overwritten in the importing process. Proceed?"))return;
 	object = {
 		prompt: "Current entries will be overwritten in the importing process. Proceed?",
 		btn0txt: "Cancel",
