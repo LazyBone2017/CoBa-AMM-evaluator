@@ -1,0 +1,142 @@
+body {
+	background: #e5e5e5
+}
+
+#board {
+	background: white;
+	width: 94%;
+	height: 96%;
+	position: absolute;
+	top: 2%;
+	left: 2%;
+}
+
+table {
+	width: 70%;
+	margin-top: 1%;
+	margin-left: 1%;
+}
+
+tr {
+	background: white;
+}
+
+td {
+	border: 1px solid black;
+}
+
+
+.hd0 {
+	word-break: break-word;
+	text-align: left;
+	margin: 10px;
+	font-size: 0.7vw;
+	font-family: Verdana;
+}
+
+.hd1 {
+	word-break: break-word;
+	text-align: center;
+	margin: 10px;
+	font-size: 0.7vw;
+	font-family: Verdana;
+}
+
+
+
+.tdh {
+	background: #ffcc33;
+}
+
+.valTd {
+	text-align: center;
+	font-size: 0.8vw;
+	font-family: Verdana;
+}
+
+.expTd {
+	width: 70%;
+	font-size: 0.8vw;
+	font-family: Verdana;
+}
+
+.expTd div {
+	word-break: break-word;
+	text-align: left;
+	margin: 10px;
+}
+
+
+.dropbtn {
+	background-color: #e5e5e5;
+	display: inline-block;
+  	color: black;
+	width: 100%;
+	padding: 2%;
+  	font-size: 0.7vw;
+	font-family: Verdana;
+  	border: none;
+	word-break: break-word;
+	box-sizing: border-box;
+	border: 1px solid black;
+}
+
+.dropdown {
+	display: inline-block;
+	width: 20%;
+	text-align: center;
+	margin-left: 1%;
+	margin-top: 1%;
+}
+
+.dropdown-content {
+ 	display: none;
+ 	position: absolute;
+ 	background-color: #f1f1f1;
+  	min-width: 160px;
+  	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  	z-index: 1;
+	font-size: 0.6vw;
+	font-family: Verdana;
+}
+
+.dropdown-content a {
+  	color: black;
+  	padding: 12px 16px;
+  	text-decoration: none;
+  	display: block;
+}
+
+.dropdown-content a:hover {
+	background-color: #ddd;
+	border-color: #ffcc33;
+}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {border-color: #ffcc33}
+
+
+#saveBtn, #backBtn, #menuBtn {
+	margin-left: 1%;
+	margin-top: 1%;
+	border-radius: 0;
+	border: 1px solid black;
+	width: 10%;
+	height: 3%;
+	background: #e5e5e5;
+	font-size: 0.6vw;
+	font-family: Verdana;
+}
+
+#saveBtn:hover, #backBtn:hover, #menuBtn:hover{
+	border-color: #ffcc33;
+	border-width: 2px;
+}
+
+#saveBtn:focus, #backBtn:focus, #menuBtn:focus {
+	outline: none;
+}
+
+
+

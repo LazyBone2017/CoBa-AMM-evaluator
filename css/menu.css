@@ -1,0 +1,83 @@
+ #board {
+	position: absolute;
+	width: 98%;
+	height: 96%;
+	left: 1%;
+	top: 2%;
+	background: White;
+}
+
+#headerBoard {
+	width: 100%;
+	background: #ffcc33;
+	height: 5%;
+	margin-top: 1%;
+	margin-bottom:10%;
+}
+
+.mBtn {
+	border-radius: 0;
+	border: 1px solid black;
+	background: #e5e5e5;
+	color: black;
+	font-size: 0.8vw;
+	font-family: Verdana;
+	width: 20%;
+	height: 10%;
+	margin-left: 40%;
+	margin-bottom: 1%;
+}
+
+.mBtn:hover {
+	border-color: #ffcc33;
+	border-width: 2px;
+}
+
+.mBtn:focus {
+	outline: none;
+}
+
+.tippy-box[data-theme~='CoBa'] {
+  color: white;
+  font-size: 0.8vw;
+}
+
+.compFile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+	
+}
+
+.compFile + label {
+    display: inline-block;
+    font-size: 0.7vw;
+	font-family: Verdana;
+	padding: 0.5%;
+    color: black;
+    background-color: #e5e5e5;
+	border: 1px solid black;
+	width: 8%;
+	text-align: center;
+	opacity: 0;
+	transition: opacity 2s;
+	overflow: hidden;
+}
+
+#fileL + label {
+	margin-left: 41%;
+}
+
+#fileR + label {
+	margin-right: 31%; /*i really have not idea why this works*/
+}
+
+.compFile + label:hover {
+    background-color: #ffcc33;
+}
+
+
+

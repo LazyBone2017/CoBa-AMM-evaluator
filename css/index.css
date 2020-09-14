@@ -1,0 +1,149 @@
+#board {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	margin-top: 1%;
+	
+}
+
+#subBoard {
+	width: 96%;
+	height: 90%;
+	padding-top: 1%;
+	margin-left: 1%;
+	background: white;
+}
+
+#menuBar {
+	width: 100%;
+	height: 5%;
+	list-style-type: none;
+	margin: 0;
+	margin-left: 1%;
+	padding: 0;
+}
+
+#util {
+	float: right;
+	margin-right: 4%;
+	width: 20%;
+	height: 100%;
+}
+
+#infoContainer{
+	float: right;
+	margin-top: 5%;
+	margin-right: 16%;
+	width: 20%;
+	height: 60%;
+	font-size: 0.7vw;
+	font-family: Verdana;
+}
+
+.mItem {
+	width: 12%;
+	height:100%;
+	float:left;
+	margin-right: 3px;
+	background: #CCCCCC;
+}
+
+.mItemContent {
+	display: flex;
+	justify-content: center;
+	height: 100%;
+	align-items: center;
+	align: center;
+	font-size: 0.7vw;
+	font-family: Verdana;
+}
+
+table {
+	width: 98%;
+	margin-left: 1%;	
+}
+
+.tableRow {
+	background: white;
+}
+
+td {
+	border: 1px solid black;
+	text-align: center;
+
+}
+
+.ttf {
+	width: 50%;
+}
+
+td div {
+	font-size: 0.7vw;
+	font-family: Verdana;
+}
+
+
+.ttf div {
+	word-break: break-word;
+	text-align: left;
+	margin: 10px;
+	font-size: 0.8vw;
+	font-family: Verdana;
+}
+
+.trb {
+	-webkit-appearance: none;
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	padding: 2px;
+	margin: 0;
+	background-clip: content-box;
+	border: 1px solid #777777;
+	background-color: #BBBBBB;
+	border-radius: 50%;
+}
+
+.trb:checked {
+		background-color: #ffcc33;
+}
+
+.trb:focus {
+	outline: none;
+}
+
+
+#btnTransfer {
+	border-radius: 0;
+	border: 1px solid black;
+	background: #CCCCCC;
+	color: white;
+	float: right;
+	margin-top: 3%;
+	margin-right: 20%;
+	width: 40%;
+	height: 60%;
+	font-size: 0.6vw;
+	font-family: Verdana;
+}
+
+#submitBtn, #clearBtn, #menuBtn {
+	margin-left: 1%;
+	border-radius: 0;
+	border: 1px solid black;
+	width: 8%;
+	height: 3%;
+	background: #e5e5e5;
+	font-size: 0.6vw;
+	font-family: Verdana;
+}
+
+#submitBtn:hover, #clearBtn:hover , #btnTransfer:hover, #menuBtn:hover{
+	border-color: #ffcc33;
+	border-width: 2px;
+}
+
+#submitBtn:focus, #clearBtn:focus, #btnTransfer:focus, #menuBtn:focus {
+	outline: none;
+}
+
