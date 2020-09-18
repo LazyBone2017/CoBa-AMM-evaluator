@@ -3,20 +3,23 @@ var globalUserData = [];
 let tempUserData;
 window.onload = setup();
 
-
+//standard page setup
 function setup(){
-	let sessionType = localStorage.getItem("sessionType");
-	if(sessionType == undefined)sessionType = 0;
+	let sessionType = localStorage.getItem("sessionType"); //determines what functionality is being used
+	if(sessionType == undefined){
+		sessionType = 0;  //manual data input mode
+		localStorage.setItem("sessionType", 0);
+	}
 	let storage = JSON.parse(localStorage.getItem("data"));
-	if(storage != undefined)globalUserData = storage;
+	if(storage != undefined)globalUserData = storage; //retrieves user data from other page
 	tabs = document.getElementsByClassName("mItem");
-	let tabContent = document.getElementsByClassName("mItemContent");
+	let tabContent = document.getElementsByClassName("mItemContent"); //adds menuItems
 	for(let i= 0; i < tabContent.length; i++){
-		//tabs[i].onclick = function(){changeTab(i)};
+		//tabs[i].onclick = function(){changeTab(i)}; //debug
 		tabContent[i].innerHTML = i == tabs.length - 1 ? "EVALUATION" : header[i];
 	}
 	let transferBtn = document.getElementById("btnTransfer");
-	if(sessionType == 2){
+	if(sessionType == 2){ //button only accessible in mode 0
 		transferBtn.style.display = "none";
 		document.getElementById("infoContainer").style.display = "none";
 	}
@@ -30,21 +33,46 @@ function setup(){
 		};
 		loadPopup();
 	}
-	document.getElementById("inputFile").addEventListener('change', function() { 
+	tippy(transferBtn, {
+		content: "Export or import complete data files.",
+		followCursor: true,
+		duration: [100, 0],
+		arrow: false,
+		theme: "CoBa",
+		offset: [140, 0],
+		maxWidth: 280
+	})	
+	
+	//imports external file and assigns content to GUD
+	document.getElementById("inputFile").addEventListener('change', function() {  //get import file
 			var fr=new FileReader(); 
-			console.log("CLICKED");
-             		fr.onload=function(){ 
-				let res = JSON.parse(fr.result); 
-				console.log(res);
-               	globalUserData = res;
-				changeTab(5);
+            fr.onload=function(){
+				let val = fileValidation(fr.result, 1); //check for corruption
+				if(val == false){
+					object = {
+						prompt: "This file has been found corrupted.",
+						btn0txt: "INVISIBLE",
+						btn1txt: "Ok",
+						btn0fct: function() {},
+						btn1fct: function() {
+							document.getElementById("GFC").style.display = "none";
+							let btn = document.getElementById("GB0");
+							btn.style.display = "inline-block";
+						}
+					};
+					document.getElementById("GB0").style.display = "none";
+					loadPopup();
+					return;
+				}
+				globalUserData = val;
+				changeTab(5); //go to evaluation
 			}
 			fr.readAsText(this.files[0]); 
-        });
+    });
 	changeTab(0);
 }
 
-
+//changes color of selected menuItem, resets for index = 0, calls evaluation() for index = 5 
 function changeTab(index){
 	let item = tabs[index];
 	for(let i = 0; i < tabs.length; i++){
@@ -60,6 +88,7 @@ function changeTab(index){
 	else evaluate();
 }
 
+//generates buttons and labels
 function loadTab(index){
 	let subBoard = document.getElementById("subBoard");
 	subBoard.appendChild(generateForms(index));
@@ -81,7 +110,7 @@ function loadTab(index){
 			btn1fct: function(){
 				document.getElementById("GFC").style.display = "none";
 				globalUserData = []; 
-				localStorage.setItem("data", JSON.stringify(globalUserData));
+				localStorage.setItem("data", JSON.stringify(globalUserData)); //resets localStorage
 				changeTab(0);
 			}
 		};
@@ -100,7 +129,7 @@ function loadTab(index){
 			btn0fct: function(){document.getElementById("GFC").style.display = "none";},
 			btn1fct: function(){
 				document.getElementById("GFC").style.display = "none";
-				localStorage.setItem("sessionType", -1);
+				localStorage.setItem("sessionType", -1); //prevents menu.js from reopening index.js because of Promises
 				window.open("../html/menu.html", "_self");
 			}
 		};
@@ -111,17 +140,18 @@ function loadTab(index){
 	
 }
 
+//returns form with tables and stuff 
 function generateForms(index){
 	let form = document.createElement("form");
 	let table = document.createElement("table");
 	for(let i = 0; i <= content[index].length; i++){
 		let tr = document.createElement("tr");
 		tr.className = "tableRow";
-		if(i == 0)tr.style.background = "#ffcc33";
+		if(i == 0)tr.style.background = "#ffcc33"; //coba yellow for header
 		else if(i % 2 == 0)tr.style.background = "#e6e6e6";
-		for(let j = 0; j < 7; j++){
-		let td = document.createElement("td");
-		let wrapper = document.createElement("div");
+		for(let j = 0; j < 7; j++){ //number of columns
+			let td = document.createElement("td");
+			let wrapper = document.createElement("div");
 			if(i == 0){
 				if(j == 0){wrapper.innerHTML = "INDICATOR"; td.className = "ttf";}
 				else wrapper.innerHTML = j != 6 ? j : "N/A";	
@@ -135,6 +165,7 @@ function generateForms(index){
 				td.appendChild(wrapper);
 			}
 			else {
+				//radio buttons
 				let radio = document.createElement("input");
 				radio.type = "radio";
 				radio.id = i + "r" + j;
@@ -145,7 +176,7 @@ function generateForms(index){
 				if(getRandomInt(5) == 1)radio.checked = true;*/
 			
 				td.appendChild(radio);
-				td.onclick = function(){radio.checked = true;};
+				td.onclick = function(){radio.checked = true;}; //easier access to button
 			}
 			tr.appendChild(td);	
 		}
@@ -159,6 +190,7 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
+//adds data of the form to tempUserData, pushes tempUserData to GUD for index = 5, exports for sessionType != 0 tempUserData to file
 function submitData(index){ 
 	let data = [];
 	let rows = document.getElementsByClassName("tableRow");
@@ -201,12 +233,14 @@ function submitData(index){
 	else changeTab(index + 1);
 }
 
+//loads GUD into localStorage
 function evaluate(){
 	console.log(globalUserData);
 	localStorage.setItem("data", JSON.stringify(globalUserData));
 	window.open("eval.html", "_self");
 }
 
+//opens download window for full export
 function exportData(){
 	object = {
 		prompt: "Only completed entries will be exported. Proceed?",
@@ -222,6 +256,7 @@ function exportData(){
 	loadPopup();
 }
 
+//opens download window for userFile export
 function exportSingleFile(){
 	console.log(tempUserData);
 	object = {
@@ -245,6 +280,7 @@ function exportSingleFile(){
 	loadPopup();	
 }
 
+//clicks input
 function importData(){
 	object = {
 		prompt: "Current entries will be overwritten in the importing process. Proceed?",

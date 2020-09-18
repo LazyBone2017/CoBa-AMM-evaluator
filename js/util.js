@@ -1,3 +1,4 @@
+//Indicators, should be no problem to modify
 var content = [
 		["customer/users and their needs are known", "There is a pioneering vision with a customer-oriented approach", "customer/users involvement already in the generation of ideas", "Reviews & refinements take place with customer/users participation", "Various formats for obtaining customer/users feedback are used", "existing products are regularly checked for customer/users benefits"],
 		["Prioritized backlogs are available", "Backlogs contain development/operations/transformation topics", "Agree quarterly planning with customer/users", "Executive Board participates in quarterly planning", "Impediments and risks are transparent", "Impediments and risks are solved or actively managed", "Transparency about existing and required skills", "Scarce resources are working on the prioritized topics", "Systematic know-how transfer takes place", "Agile meetings are well established", "Metrics are collected and visible to all team members"],
@@ -33,6 +34,7 @@ function loadPopup(){
 //structure
 //let object = {prompt: "PROMPT", btn0txt: "Test", btn1txt: "Test2", btn0Fct: test(), btn1Fct: test1()};
 
+//inserts popup HTML
 function createPopupFramework(){
 	let html = "<div id=\"GFC\" style=\"display: none\"><div id=\"PUG\"><p id=\"PUTG\"></p><button type=\"button\" id=\"GB0\"></button><button type=\"button\" id=\"GB1\"></button></div></div>";
 	document.body.insertAdjacentHTML("beforeend", html);
@@ -42,6 +44,7 @@ function createPopupFramework(){
 	document.getElementsByTagName("head")[0].appendChild(link);
 }
 
+//checks for correct browser, warns if negative
 function setup(){
 	createPopupFramework();
 	var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
@@ -63,3 +66,37 @@ var buttonTooltips = ["Use this if you want to transfer data from a sheet into d
 						"Use this if you want to collect and evaluate the data from multiple personal(master) files",
 						"Create a personal(master) file for later use in mode 2.",
 						"Compare two previously saved datasheets."];
+						
+
+function contentLength(){
+	let inc = 0;
+	for(let arr of content){
+		for(item of arr){
+			inc++;
+		}
+	}
+	return inc;
+}
+						
+					
+function fileValidation(string, valType){
+	let arr;
+	try {
+		arr = JSON.parse(string);
+		if(valType == 0){ //personal file
+			if(arr.length != contentLength() + 1 || typeof arr[0] != typeof true)return false;			
+		}
+		else if(valType == 1){ //result file
+			let length = contentLength();
+			for(let sub of arr){
+				if(sub.length != length + 1 || typeof sub[0] != typeof true) return false;	
+			}
+		}
+		else return false;
+	}
+	catch(err){
+		console.log("Error in fileValidation:\n" + err);
+		return false;
+	}
+	return arr;
+}

@@ -12,14 +12,14 @@
 			<button type="button" id="mButton2" class="mBtn" onclick="redirect(2)">PERSONAL / MASTER FILE CREATION</button>
 			<button type="button" id="mButton3" class="mBtn" onclick="redirect(3)">COMPARISON</button>
 			<div id=compInputs>
-				<input type="file" name="fileL" id="fileL" class="compFile">
-				<label for="fileL" class="compFileLabel" id="labelL">CHOOSE FILE 1</label>
-				<input type="file" name="fileR" id="fileR" class="compFile">
-				<label for="fileR" class="compFileLabel" id="labelR">CHOOSE FILE 2</label>
+				<input type="file" name="fileL" id="fileL" class="compFile" accept=".json" disabled>
+				<label for="fileL" class="compFileLabel" id="labelL" disabled>CHOOSE FILE 1</label>
+				<input type="file" name="fileR" id="fileR" class="compFile" accept=".json" disabled>
+				<label for="fileR" class="compFileLabel" id="labelR" disabled>CHOOSE FILE 2</label>
 			</div>
 		
 		</div>
-		<input type="file" name="fileInput" id="inputFile" multiple style="display:none">
+		<input type="file" name="fileInput" id="inputFile" multiple style="display:none" accept=".json">
 	</body>
 	<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
 	<script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>

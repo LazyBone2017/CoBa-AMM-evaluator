@@ -4,11 +4,12 @@ let masterFile = false;
 let criticalDifference = 1;
 window.onload = setup();
 
+
+//parse data
 function setup(){
 	data = JSON.parse(localStorage.getItem("data"));
-	console.log(data);
+	console.log("Data @ eval.js " + data);
 	let mFileIndex = findMasterFile();
-	console.log(mFileIndex);
 	for(let i = 1; i < data[0].length; i++){
 		let avg = 0;
 		let nas = 0;
@@ -41,6 +42,7 @@ function findMasterFile(){
 	return index;
 }
 
+//generates tables, shows table0 by default
 function generateTables(mFileIndex){
 	let x = 0;
 	for(let i = 0; i < content.length; i++){
@@ -72,7 +74,7 @@ function generateTables(mFileIndex){
 			let tr = document.createElement("tr");
 			if(j %  2 == 1)tr.style.background = "#e6e6e6";
 			let critical = Math.abs(data[masterFile ? mFileIndex : 0][x + 1] - averages[x]) >= criticalDifference;
-			if(critical)tr.style.background = "#f55742";
+			if(critical)tr.style.background = "#ff8d3b";
 			
 			let exp = document.createElement("td");
 			exp.className = "expTd";
@@ -100,6 +102,7 @@ function generateTables(mFileIndex){
 	}
 }
 
+//displays the table chosen in the dropdown
 function changeTable(index){
 	let tables = document.getElementsByClassName("tables");
 	console.log(tables[index]);
@@ -110,6 +113,7 @@ function changeTable(index){
 	document.getElementById("dropdownButton").innerHTML = header[index];
 }
 
+//creates a menu for the tables
 function generateMenu(){
 	let wrapper = document.getElementById("dropdownContent");
 	document.getElementById("dropdownButton").innerHTML = header[0];
@@ -128,6 +132,7 @@ function back(){
 	window.open("index.html", "_self");
 }
 
+//exports data as @index.js
 function exportData(){
 	object = {
 		prompt: "Please select the filetype:",
@@ -170,9 +175,16 @@ function export2Word(){
 	
 }
 
+//popup for changing the critical value
 function createPopup2(mFileIndex){
+	if(!masterFile){
+		criticalDifference = 10; //just higher than possible -> no warning
+		generateTables(mFileIndex);
+		generateMenu();
+	}
+	else {
 		object = {
-			prompt: "WARNING LIMIT:",
+			prompt: "WARNING LIMIT:<br><br>This determines at which difference the row is being colored.",
 			btn0txt: "-",
 			btn1txt: "CONTINUE",
 			btn0fct: function(){},
@@ -198,4 +210,5 @@ function createPopup2(mFileIndex){
 		
 		document.getElementById("PUG").appendChild(input);
 		loadPopup();
+	}
 }
