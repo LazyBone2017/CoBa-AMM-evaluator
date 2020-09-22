@@ -17,7 +17,11 @@
 table {
 	width: 48%;
 	margin-left: 1%;
+	margin-bottom: 0.5%;
 	float: left;
+}
+
+table1 {
 }
 
 tr {
@@ -85,9 +89,9 @@ td {
 }
 
 #backBtn {
-	position: absolute;
-	left: 2%;
-	bottom: 15%;
+	display: flow-root;
+	clear: left;
+	margin-left: 1.15%;
 	box-sizing: border-box;
 	border-radius: 0;
 	border: 1px solid black;

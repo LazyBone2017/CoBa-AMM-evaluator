@@ -62,7 +62,9 @@ function findMasterFile(dataIntern){
 function generateTables(){
 	let sb = document.getElementById("subBoard");
 	let table0 = document.createElement("table");
+	table0.id = "table0";
 	let table1 = document.createElement("table");
+	table0.id = "table1";
 	
 	let indHeader = document.createElement("td");
 	indHeader.className = "indHeader";
@@ -181,8 +183,10 @@ function generateTables(){
 			giContainer.style.marginLeft = "30%";
 			//giContainer.style.height = (window.innerHeight / 56.46) + "px";
 			
-			if(averages0[inc] > averages1[inc]) giContainer.innerHTML = "<svg viewBox=\"0 0 40 40\"><polygon points=\"10,20 30,20 20,30\" style=\"fill:red;stroke:black;stroke-width:1\"/></svg>";
-			else giContainer.innerHTML = "<svg viewBox=\"0 0 40 40\"><polygon points=\"10,25 30,25 20,15\" style=\"fill:lime;stroke:black;stroke-width:1\"/></svg>";
+			
+			if(averages0[inc] > averages1[inc]) giContainer.innerHTML = "<svg viewBox=\"0 0 40 40\"><polygon points=\"10,17 30,17 20,27\" style=\"fill:red;stroke:black;stroke-width:1\"/></svg>";
+			else if(averages0[inc] < averages1[inc]) giContainer.innerHTML = "<svg viewBox=\"0 0 40 40\"><polygon points=\"10,25 30,25 20,15\" style=\"fill:lime;stroke:black;stroke-width:1\"/></svg>";
+			else giContainer.innerHTML = "<svg viewBox=\"0 0 40 40\"><polygon points=\"13,18 13,22 27,22 27,18\" style=\"fill:red;stroke:black;stroke-width:1\"/></svg>";
 		
 			growthCell.appendChild(giContainer);
 			
@@ -213,7 +217,7 @@ function generateTables(){
 	backBtn.onclick = function() {
 		window.open("../html/menu.html", "_self");
 	};
-	document.getElementById("subBoard").appendChild(backBtn);
 	
 	sb.appendChild(table1);
+	sb.appendChild(backBtn);
 }

@@ -160,13 +160,15 @@ function openComp(files){
 				btn1txt: "Ok",
 				btn0fct: function(){},
 				btn1fct: function(){
-					document.getElementById("GB0").style.display = "inline-block";
+					/*document.getElementById("GB0").style.display = "inline-block";
 					document.getElementById("PUTG").style.overflowY = "hide";
 					document.getElementById("GFC").style.display = "none";
 					let inc = 1;
 					for(label of document.getElementsByClassName("compFileLabel")){
 						label.innerHTML = "CHOOSE FILE " + inc++;
-					}
+						compFiles = 0;
+					}*/
+					location.reload();
 				}
 			}
 			document.getElementById("GB0").style.display = "none";

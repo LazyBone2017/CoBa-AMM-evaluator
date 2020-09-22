@@ -10,6 +10,20 @@ function setup(){
 	data = JSON.parse(localStorage.getItem("data"));
 	console.log("Data @ eval.js " + data);
 	let mFileIndex = findMasterFile();
+	if(mFileIndex == -2){
+		object = {
+					prompt: "There musn't be multiple master files.",
+					btn0txt: "INVISIBLE",
+					btn1txt: "Understood",
+					btn0fct: function() {},
+					btn1fct: function() {
+						window.open("../html/menu.html", "_self");
+					}
+				}
+				document.getElementById("GB0").style.display = "none";
+				loadPopup();
+				return;
+	}
 	for(let i = 1; i < data[0].length; i++){
 		let avg = 0;
 		let nas = 0;
@@ -17,7 +31,6 @@ function setup(){
 			let val = parseInt(data[j][i]);
 			if(val == 6 || j == mFileIndex)nas++;
 			else avg += val;
-			//avg += val == 6 ? 0 : val;
 		}
 		averages.push((avg / (data.length - nas)).toFixed(2));
 		
@@ -36,7 +49,9 @@ function findMasterFile(){
 				masterFile = true;
 				index = i;
 			}
-			else throw "More than 1 master file";
+			else {
+				return -2;
+			}
 		}
 	}
 	return index;
@@ -138,7 +153,9 @@ function exportData(){
 		prompt: "Please select the filetype:",
 		btn0txt: "Export to PDF",
 		btn1txt: "Export to JSON",
-		btn0fct: function(){/*export2Word();*/document.getElementById("GFC").style.display = "none";},
+		btn0fct: function(){
+			export2Pdf();
+		},
 		btn1fct: function(){
 			let name = "AMM_DATA_" + getDate();
 			downloadContent(name + ".json", JSON.stringify(data));
@@ -171,7 +188,31 @@ function backToMenu(){
 		window.open("../html/menu.html", "_self");
 } 
 
-function export2Word(){
+function export2Pdf(){
+	const { jsPDF } = window.jspdf;
+	let doc = new jsPDF();
+	let table = document.createElement("table");
+	for(let i = 0; i < 5; i++){
+		for(node of document.getElementById("table" + i).childNodes){
+			let row = node.cloneNode(true);
+			 if(row.childNodes[0].className != "tdh" || i == 0){
+				 table.appendChild(row);
+			 }
+			 else {
+				 row.innerHTML = "<td></td>";
+				 table.appendChild(row);
+			 }
+		}
+	}
+	console.log(table);
+	let name = prompt("Please state the internal header here:");
+	doc.text(name + "\n", 10, 10);
+	doc.autoTable({html: table, styles: {
+		lineWidth: number = 0.3,
+		lineColor: "black"
+	}});
+	document.getElementById("GFC").style.display = "none";
+	doc.save(name + ".pdf");
 	
 }
 

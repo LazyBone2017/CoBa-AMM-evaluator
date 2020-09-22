@@ -116,7 +116,8 @@ function loadTab(index){
 		};
 		loadPopup();
 	}
-	subBoard.appendChild(clearBtn);
+	let sessionType = localStorage.getItem("sessionType");
+	if(sessionType == 1)subBoard.appendChild(clearBtn);
 	
 	let menuBtn = document.createElement("button");
 	menuBtn.id = "menuBtn";
