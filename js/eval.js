@@ -98,7 +98,7 @@ function generateTables(mFileIndex){
 			div.innerHTML = content[i][j];
 			
 			let value = document.createElement("td");
-			value.innerHTML = averages[x];
+			value.innerHTML = averages[x] != "NaN" ? averages[x] : "N/A";
 			value.className = "valTd";
 			
 			let compVal = document.createElement("td");
@@ -144,6 +144,7 @@ function generateMenu(){
 }
 
 function back(){
+	localStorage.setItem("sessionType", 0);
 	window.open("index.html", "_self");
 }
 

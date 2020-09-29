@@ -42,24 +42,20 @@ function createPopupFramework(){
 	link.href = "../css/util.css";
 	link.rel = "stylesheet";
 	document.getElementsByTagName("head")[0].appendChild(link);
+	document.addEventListener("keydown", (event) => {
+		if(event.code == "Escape" && document.getElementById("GFC").style.display != "none"){
+			document.getElementById("GFC").style.display = "none";
+		}
+		if(event.code == "Enter" && document.getElementById("GFC").style.display != "none"){
+			console.log("ENTER");
+			document.getElementById("GB1").click();
+		}
+	});
 }
 
-//checks for correct browser, warns if negative
+
 function setup(){
 	createPopupFramework();
-	var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-	if(!isChrome){
-		object = {
-			prompt: "Please make sure to run this application in Chrome.",
-			btn0txt: "-",
-			btn1txt: "-",
-			btn0fct: function(){},
-			btn1fct: function(){}
-		};
-		document.getElementById("GB0").style.display = "none";
-		document.getElementById("GB1").style.display = "none";
-		loadPopup();
-	}
 }
 
 var buttonTooltips = ["Use this if you want to transfer data from a sheet into digital storage, or to import a previously saved datasheet",

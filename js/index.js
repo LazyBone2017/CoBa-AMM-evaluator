@@ -117,7 +117,7 @@ function loadTab(index){
 		loadPopup();
 	}
 	let sessionType = localStorage.getItem("sessionType");
-	if(sessionType == 1)subBoard.appendChild(clearBtn);
+	if(sessionType == 0)subBoard.appendChild(clearBtn);
 	
 	let menuBtn = document.createElement("button");
 	menuBtn.id = "menuBtn";
@@ -203,7 +203,18 @@ function submitData(index){
 		if(data.length == i - 1)data[i - 1] = -1;
 	}
 	if(data.includes(-1)){
-		alert("You have to fill out the whole list in order to continue");
+		object = {
+			prompt: "You have to fill out the whole list in order to continue",
+			btn0txt: "INVISIBLE",
+			btn1txt: "Understood",
+			btn0fct: function(){},
+			btn1fct: function(){
+				document.getElementById("GFC").style.display = "none";
+				document.getElementById("GB0").style.display = "inline-block";
+			}
+		};
+		document.getElementById("GB0").style.display = "none";
+		loadPopup();
 		return;
 	}
 	tempUserData.push(...data);
@@ -233,6 +244,7 @@ function submitData(index){
 	}
 	else changeTab(index + 1);
 }
+
 
 //loads GUD into localStorage
 function evaluate(){

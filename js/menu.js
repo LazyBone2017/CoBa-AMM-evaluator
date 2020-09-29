@@ -36,7 +36,22 @@ function setup(){
 	let GUD = [];
 	document.getElementById("inputFile").addEventListener('change', function() { 
 		if(this.files.length < 2){
-			alert("The application needs at least 2 files in order to work properly.");
+			object = { //popup hides after 1.5s
+				prompt: "The application needs at least 2 files in order to work properly.",
+				btn0txt: "",
+				btn1txt: "",
+				btn0fct: function(){},
+				btn1fct: function(){}
+			};
+			document.getElementById("GB0").style.display = "none";
+			document.getElementById("GB1").style.display = "none";
+			loadPopup();
+			setTimeout(() => {
+				document.getElementById("GFC").style.display = "none";
+				document.getElementById("GB0").style.display = "button";
+				document.getElementById("GB1").style.display = "button";
+			}, 1500);
+			//alert("The application needs at least 2 files in order to work properly.");
 			return;
 		}
 		let promises = [];
